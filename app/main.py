@@ -8,6 +8,10 @@ app = FastAPI()
 def read_root():
   return {"message": "Hello World"}
 
+@app.get("/tests")
+def read_test():
+  return {"message": "Hello World Test"}
+
 if __name__ == "__main__":
     if len(sys.argv) == 2:
         match sys.argv[1]:
