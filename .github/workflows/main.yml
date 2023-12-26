@@ -35,16 +35,9 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         
         script: |
-          echo "list env"
-          echo ${{ secrets.VPS_SSH_HOST }}
-          echo ${{ secrets.VPS_SSH_USERNAME }}
-          echo ${{ secrets.VPS_SSH_SECRET }}
-          echo ${{ secrets.VPS_SSH_PORT }}
-          echo ${{ secrets.SSH_PASSPHRASE }}
-          echo ${{ secrets.PROJECT_PATH }}
-          echo "end of list env"
           cd ${{ secrets.PROJECT_PATH }}
           git pull origin master
+          sudo su
           docker compose down
           echo "Starting containers..."
           docker compose up -d
