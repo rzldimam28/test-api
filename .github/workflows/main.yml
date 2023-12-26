@@ -8,32 +8,11 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  # Run this workflow manually from the Actions tab on Repo homepage
+  workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Docker
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.x
-
-    - name: Check for changes in Dockerfile
-      run: git diff --quiet HEAD -- Dockerfile || touch ./docker-changed
-
-    - name: Build Docker image
-      run: |
-        if [ -f ./docker-changed ]; then
-          docker build -t my-fastapi-app .
-          rm ./docker-changed
-        else
-          echo "No changes in Dockerfile. Using existing image."
-        fi
-
+  
   deploy:
     runs-on: ubuntu-latest
     
@@ -56,6 +35,14 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         
         script: |
+          echo "list env"
+          echo ${{ secrets.VPS_SSH_HOST }}
+          echo ${{ secrets.VPS_SSH_USERNAME }}
+          echo ${{ secrets.VPS_SSH_SECRET }}
+          echo ${{ secrets.VPS_SSH_PORT }}
+          echo ${{ secrets.SSH_PASSPHRASE }}
+          echo ${{ secrets.PROJECT_PATH }}
+          echo "end of list env"
           cd ${{ secrets.PROJECT_PATH }}
           git pull origin master
           docker compose down
