@@ -37,7 +37,6 @@ jobs:
         script: |
           cd ${{ secrets.PROJECT_PATH }}
           git pull origin master
-          sudo su
           docker compose down
           echo "Starting containers..."
           docker compose up -d
