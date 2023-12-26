@@ -5,12 +5,18 @@ import uvicorn
 app = FastAPI()
 
 @app.get("/")
-def read_root():
+def home():
+  """
+  This is endpoint for Home Page
+  """
   return {"message": "Hello World"}
 
 @app.get("/tests")
-def read_test():
-  return {"message": "Hello World Test"}
+def test():
+  """
+  This is endpoint for Test Page
+  """
+  return {"message": "Test"}
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
