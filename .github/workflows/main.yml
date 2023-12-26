@@ -21,29 +21,22 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         # VPS IP
-        host: ${{ secrets.VPS_SSH_HOST }}
+        host: 27.112.79.156
                   
         # VPS username
-        username: ${{ secrets.VPS_SSH_USERNAME }}
+        username: imam
                   
         # SSH key (copy it from your local machine)
-        key: ${{ secrets.VPS_SSH_SECRET }}
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCi7JKjX7ZZjNhJRTB7C+E7cVr34gTG67pAnnHbtzcQdMOFGRmJlwXasms45QYs4xgsUl+GUB478CXwEFbOcZXqxs2ri+IB48LgZgaUeFdk4aD1FzeSvSHJHadR2E2S/XydmJ14mD/0wI4NoVSN6VE6uT/Wc9e3eiYaT8fInSJP0qZvB69NMI3C3U2a43pzS/hThllvbe3ZpdIL7vWpmKhJbqP/nu1LB1TlbEWCRGj2NxI5P8LPDGBe7AF/O1JyWbPwT8+loc7B80ErVTfi0HVHa5A7kYIXc6wMgjA16BC/AbwqU4DfSn7zt5gTtCrw+eGG71zrMLavNPjCkhmCsylDHh+c9+XYHjOt0oQkL8AR7vRo4NeiLu9KPf6UB/5n1UUeaJDQCxSDq/BmCGD78mgkfhEpSvgZ5Pr84Ln7CIXVT16eBYHSDgkcs1dfNPZuvR/6zb8/x5P67YD4r9Ht7LpIYG6R3ZcgyJyxY3gdN6NX6c2BWAQABjl0fSoJy2V6vwU= rzldimam28@LAPTOP-9P9HPBNO
         
         # SSH port
-        port: ${{ secrets.VPS_SSH_PORT }}
+        port: 22
+
         # passphrase
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         
         script: |
-          echo "list env"
-          echo ${{ secrets.VPS_SSH_HOST }}
-          echo ${{ secrets.VPS_SSH_USERNAME }}
-          echo ${{ secrets.VPS_SSH_SECRET }}
-          echo ${{ secrets.VPS_SSH_PORT }}
-          echo ${{ secrets.SSH_PASSPHRASE }}
-          echo ${{ secrets.PROJECT_PATH }}
-          echo "end of list env"
-          cd ${{ secrets.PROJECT_PATH }}
+          cd /home/imam/test-api
           git pull origin master
           docker compose down
           echo "Starting containers..."
